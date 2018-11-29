@@ -28,7 +28,7 @@ import org.sonar.samples.java.checks.AvoidMethodDeclarationRule;
 import org.sonar.samples.java.checks.AvoidSuperClassRule;
 import org.sonar.samples.java.checks.AvoidUnmodifiableListRule;
 import org.sonar.samples.java.checks.MyCustomSubscriptionRule;
-import org.sonar.samples.java.checks.SecurityAnnotationMandatoryRule;
+//import org.sonar.samples.java.checks.SecurityAnnotationMandatoryRule;
 import org.sonar.samples.java.checks.SpringControllerRequestMappingEntityRule;
 
 public final class RulesList {
@@ -49,7 +49,6 @@ public final class RulesList {
       .add(AvoidSuperClassRule.class)
       .add(AvoidUnmodifiableListRule.class)
       .add(MyCustomSubscriptionRule.class)
-      .add(SecurityAnnotationMandatoryRule.class)
       .build();
   }
 

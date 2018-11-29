@@ -19,6 +19,7 @@
  */
 package org.sonar.samples.java.checks;
 
+import java.util.Iterator;
 import java.util.List;
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
@@ -29,9 +30,11 @@ import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.plugins.java.api.tree.Tree;
+import org.sonar.plugins.java.api.tree.VariableTree;
+import org.sonar.plugins.java.api.tree.TypeParameterTree;;
 
 @Rule(key = "AvoidAnnotation")
-public class AvoidAnnotationRule extends BaseTreeVisitor implements JavaFileScanner {
+public class DemoRule extends BaseTreeVisitor implements JavaFileScanner {
 
   private static final String DEFAULT_VALUE = "Inject";
 
@@ -57,7 +60,16 @@ public class AvoidAnnotationRule extends BaseTreeVisitor implements JavaFileScan
 
   @Override
   public void visitMethod(MethodTree tree) {
+	  System.out.println(PrinterVisitor.print(tree));
+	  
     List<AnnotationTree> annotations = tree.modifiers().annotations();
+    Iterator it = tree.typeParameters().iterator();
+    while(it.hasNext()) {
+    	System.out.println("TypeParameter===== " + it.next());
+    }
+    
+   
+    
     for (AnnotationTree annotationTree : annotations) {
       if (annotationTree.annotationType().is(Tree.Kind.IDENTIFIER)) {
         IdentifierTree idf = (IdentifierTree) annotationTree.annotationType();
@@ -67,6 +79,18 @@ public class AvoidAnnotationRule extends BaseTreeVisitor implements JavaFileScan
           context.reportIssue(this, idf, String.format("Avoid using annotation @%s", name));
         }
       }
+      
+      if(annotationTree.annotationType().is(Tree.Kind.VARIABLE)) {
+    	  VariableTree varTree= (VariableTree) annotationTree.annotationType();
+    	  System.out.println("This is variable =====" + varTree.symbol().name());
+      }
+      
+      if(annotationTree.annotationType().is(Tree.Kind.TYPE_PARAMETERS)) {
+    	  TypeParameterTree paramTree= (TypeParameterTree) annotationTree.annotationType();
+    	  System.out.println("This is type paramter =====" );
+      }
+      
+
     }
 
     // The call to the super implementation allows to continue the visit of the AST.
