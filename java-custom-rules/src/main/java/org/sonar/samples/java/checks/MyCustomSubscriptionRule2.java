@@ -21,30 +21,29 @@ package org.sonar.samples.java.checks;
 
 import java.util.Iterator;
 import java.util.List;
+
 import org.sonar.check.Rule;
 import org.sonar.check.RuleProperty;
 import org.sonar.plugins.java.api.JavaFileScanner;
 import org.sonar.plugins.java.api.JavaFileScannerContext;
 import org.sonar.plugins.java.api.semantic.Symbol;
 import org.sonar.plugins.java.api.tree.AnnotationTree;
-import org.sonar.plugins.java.api.tree.Arguments;
 import org.sonar.plugins.java.api.tree.AssignmentExpressionTree;
 import org.sonar.plugins.java.api.tree.BaseTreeVisitor;
-import org.sonar.plugins.java.api.tree.ExpressionTree;
 import org.sonar.plugins.java.api.tree.IdentifierTree;
 import org.sonar.plugins.java.api.tree.LiteralTree;
 import org.sonar.plugins.java.api.tree.MethodInvocationTree;
+import org.sonar.plugins.java.api.tree.MethodReferenceTree;
 import org.sonar.plugins.java.api.tree.MethodTree;
 import org.sonar.plugins.java.api.tree.ModifierTree;
 import org.sonar.plugins.java.api.tree.Tree;
-import org.sonar.plugins.java.api.tree.VariableTree;
-import org.sonar.plugins.java.api.tree.TypeParameterTree;
 import org.sonar.plugins.java.api.tree.TypeTree;
-import org.sonar.plugins.java.api.tree.MethodReferenceTree;
-import org.sonar.plugins.java.api.tree.MethodInvocationTree;
-import com.olf.openjvs.Table;
+import org.sonar.plugins.java.api.tree.VariableTree;
 
-@Rule(key = "AvoidAnnotation")
+@Rule( key = "MyCustomSubscriptionRule2",
+name = "MyCustomSubscriptionRule2",
+description = "MyCustomSubscriptionRule2",
+tags = {"bug"})
 public class MyCustomSubscriptionRule2 extends BaseTreeVisitor implements JavaFileScanner {
 
   private static final String DEFAULT_VALUE = "Inject";
@@ -109,14 +108,13 @@ public class MyCustomSubscriptionRule2 extends BaseTreeVisitor implements JavaFi
 	  System.out.println("=======Assignment Tree Variable======= " + assignTree.variable());
 	  System.out.println("=======Assignment Tree Variable Name======= " + assignTree.variable().symbolType().name());
 	  System.out.println("=======Assignment Tree Expressoin======= " + assignTree.expression().symbolType().name());
-	  System.out.println("=======Assignment Tree Variable======= " + assignTree.expression().symbolType().name());
 	  
 	  
 	  if(assignTree.variable().symbolType().isSubtypeOf("com.olf.openjvs.Table")) {
 		  context.reportIssue(this, tree, "message");  
 	  }
-	  // TODO Auto-generated method stub
-		super.visitAssignmentExpression(tree);
+
+	  super.visitAssignmentExpression(tree);
 	}
   @Override
 	public void visitLiteral(LiteralTree tree) {
@@ -125,7 +123,6 @@ public class MyCustomSubscriptionRule2 extends BaseTreeVisitor implements JavaFi
 	  System.out.println("\n=======Literla tree=======" + litTree.value());
 	  
 	  
-		// TODO Auto-generated method stub
 		super.visitLiteral(tree);
 	}
   
@@ -136,8 +133,8 @@ public class MyCustomSubscriptionRule2 extends BaseTreeVisitor implements JavaFi
 	  System.out.println("\n=======indetifier Tree=======" + idtree.name());
 	  
 	  System.out.println("\n=======Identifier Tree usage======= " + idtree.symbol().usages());
-		// TODO Auto-generated method stub
-		super.visitIdentifier(tree);
+
+	  super.visitIdentifier(tree);
 	}
   
   

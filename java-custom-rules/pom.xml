@@ -103,6 +103,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.openlink</groupId>
+			<artifactId>jvs</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
@@ -193,6 +199,11 @@
 									<groupId>org.springframework</groupId>
 									<artifactId>spring-context</artifactId>
 									<version>4.3.3.RELEASE</version>
+								</artifactItem>
+								<artifactItem>
+									<groupId>com.openlink</groupId>
+									<artifactId>jvs</artifactId>
+									<version>1.0.0</version>
 								</artifactItem>
 							</artifactItems>
 							<outputDirectory>${project.build.directory}/test-jars</outputDirectory>

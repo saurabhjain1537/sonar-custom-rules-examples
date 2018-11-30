@@ -1,15 +1,15 @@
 import com.olf.openjvs.Table;
+import com.olf.openjvs.Util;
 
 class A {
 
-//	 @Zuper // Noncompliant {{Avoid using annotation @Zuper}}
  public int foo(double me) {
 	  String param2; 
-	  param2 = "paras"; 
+	  param2 = "aaaa"; 
 	  string param6 = callMe(param2);
 	  System.out.println(param6);
 	  String param3;
-	  param3 = "yadav";
+	  param3 = "bbbb";
 	  string param7 = callMe(param3);
 	  System.out.println(param7);
 	  String param4;
@@ -19,9 +19,11 @@ class A {
 	  
 	  param2.substring(0, 3);
 	  Table table1;
+	  table1 = Util.NULL_TABLE;
 	  
 	  try {
-		  Table tbl = com.olf.openjvs.Table.tableNew();
+		  Table tbl; 
+		  tbl = com.olf.openjvs.Table.tableNew(); // Noncompliant {{message}}
 		  tbl.destroy();
 		  
 	  }catch(Exception exp) {
@@ -32,14 +34,7 @@ class A {
 	 
 	 public String callMe(String param5) {
 		 System.out.println(" \n =========== Call Me method called with parameter " + param5 );
-		 table1.des
 		 
 		 return "\n===== Returning your call======";
 	 }
-/*  int foo(int a) {} 
-  int foo(int a, int b) {}
-
-  int foo(Object a){} 
-  String foo(String a){} // Noncompliant {{message}}
-  String foo(Object a){}*/
 }
